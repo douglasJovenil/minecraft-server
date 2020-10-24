@@ -1,5 +1,4 @@
-# Minecraft Server Docker
-
+# Minecraft Server Sky Block Docker
 
 ## Installing
 ```
@@ -15,26 +14,6 @@ docker exec -it minecraft /bin/bash
 ```
 sudo docker-compose build
 sudo docker-compode up -d
-```
-
-## Setup machine
-
-- Download the lastest version of Java from http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-- Transfer the file to cloud machine
-- copy the file to **/opt**
-```
-sudo mv JAVAFILE.tax.gz /opt
-cd /opt
-sudo tar -zxvf JAVAFILE.tar.gz
-sudo rm JAVAFILE.tar.gz
-sudo update-alternatives --install /usr/bin/java java /opt/JAVAFOLDER/bin/java 1
-sudo update-alternatives --install /usr/bin/javac javac /opt/JAVAFOLDER/bin/javac 1
-```
-
-In the steps bellow be shore to choose the version that you installed:
-```
-sudo update-alternatives --config java
-sudo update-alternatives --config javac
 ```
 
 ## SSH On GCloud
@@ -53,9 +32,3 @@ sudo service ssh restart
 sudo adduser USERNAME
 sudo usermod -aG sudo USERNAME
 ```
-
-## Mods
-- Aether
-- Skyblock
-- Stoneblock
-- Moonlight
