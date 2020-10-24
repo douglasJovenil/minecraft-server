@@ -1,14 +1,17 @@
 from requests import get
-from os.path import isfile
-from os import system, listdir, remove
-from subprocess import Popen
-from shutil import move
+from os.path import isfile, isdir
+from os import system, listdir, remove, kill
+from subprocess import Popen, PIPE
+from shutil import rmtree
+from zipfile import ZipFile
+from time import sleep
+from signal import SIGINT
 
 def main():
   urlInstaller = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.3-34.1.0/forge-1.16.3-34.1.0-installer.jar'
-  urlMod = 'https://media.forgecdn.net/files/3014/251/stoneBlock-1.0.37.zip'
+  urlMod = 'https://ijaminecraft.com/download/map/IJAMinecrafts-OneBlock-1-16-3.zip?v=VERSION'
 
-  modFilename = 'stoneblock.zip'
+  modFilename = 'skyblock.zip'
   
   forgeInstallerFilename = 'forgeInstaller.jar'
 
@@ -33,16 +36,17 @@ def main():
     # Cria o arquivo eula
     with open('eula.txt', 'w') as f: f.write('eula=true')
 
-    # Roda o servidor forge para criar o arquivo server.properties
-    process = Popen(f'java -jar {getForgeApplicationFilename()} nogui')
+    print('Aguardando primeira inicialização do servidor...')
+    process = Popen(f'java -jar {getForgeApplicationFilename()} nogui', shell=True)
+    # Aguarda alguns arquivos serem criados para depois finalizar o processo
+    while (not(isdir('world/serverconfig'))): pass
+    system('pkill java')
 
-    # Aguarda o arquivo server.properties ser criado
-    while (not(isfile('server.properties'))): pass
-    # Aguarda o arquivo server.properties ser escrito
-    with open('server.properties', 'r') as f: 
-      while(len(f.read()) == 0): pass
-    # Para o servidor
-    process.kill()
+    hasJavaProcess = True
+    while (hasJavaProcess):
+      pipe = Popen(['ps', '-ef'], stdout=PIPE)
+      text = str(pipe.communicate()[0])
+      if (text.count('java') == 0): hasJavaProcess = False
 
     # Configura o servidor
     with open('server.properties', 'r') as f:
@@ -52,17 +56,22 @@ def main():
     # Salva as configuracoes do servidor
     with open('server.properties', 'w') as f: f.write(content)
 
-    # Remove os arquivos de instalacao
-    remove(forgeInstallerFilename)
-    remove(f'{forgeInstallerFilename}.log')
-
     # Baixa os mods
     print('Baixando mods...')
     response = get(urlMod)
     with open(modFilename, 'wb') as f: 
       f.write(response.content)
-    move(modFilename, './mods')
 
+    rmtree('world')
+    mod = ZipFile(modFilename)
+    for file in mod.infolist():
+      file.filename = f'world/{"/".join(file.filename.split("/")[1:])}'
+      mod.extract(file)
+
+    # Remove os arquivos de instalacao
+    remove(forgeInstallerFilename)
+    remove(f'{forgeInstallerFilename}.log')
+    remove(modFilename)
   
   if (forgeApplicationFileAlreadyExists):
     print('Inicializando servidor...')
