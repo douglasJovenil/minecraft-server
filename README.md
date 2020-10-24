@@ -9,7 +9,7 @@ sudo docker-compose build
 
 ## Running container
 ```
-sudo docker-compode up -d
+sudo docker-compose up -d
 ```
 
 ## SSH On GCloud
