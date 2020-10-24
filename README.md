@@ -11,6 +11,22 @@ docker start minecraft
 docker exec -it minecraft /bin/bash
 ```
 
+## SSH On GCloud
+
+Open the file **/etc/ssh/sshd_config**, and change the following line :
+```
+PasswordAuthentication no
+```
+to:
+```
+PasswordAuthentication yes
+```
+then:
+```
+sudo service ssh restart
+sudo adduser USERNAME
+```
+
 ## Mods
 - Aether
 - Skyblock
