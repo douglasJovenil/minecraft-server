@@ -1,0 +1,9 @@
+services:
+  minecraft:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: minecraft
+    restart: always
+    ports:
+      - "25565:25565"
