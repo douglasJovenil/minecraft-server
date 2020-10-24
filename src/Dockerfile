@@ -6,7 +6,6 @@ WORKDIR /minecraft
 RUN apt-get update -y
 RUN apt-get install default-jre -y
 RUN apt-get install openjdk-11-jre-headless -y
-# RUN apt-get install openjdk-8-jre-headless -y
 
 COPY src/setup.py .
 COPY src/start.py .
