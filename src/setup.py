@@ -54,7 +54,8 @@ def main():
     with open('server.properties', 'r') as f:
       content = f.read()
       content = content.replace('online-mode=true', 'online-mode=false')
-      content = content.replace('view-distance=10', 'view-distance=20')
+      content = content.replace('view-distance=10', 'view-distance=32')
+      content = content.replace('allow-flight=false', 'allow-flight=true')
     # Salva as configuracoes do servidor
     with open('server.properties', 'w') as f: f.write(content)
 
