@@ -1,14 +1,20 @@
   
 FROM python
 
-# RUN mkdir /minecraft
 WORKDIR /minecraft
 
-# RUN apt-get update -y
-# RUN apt-get upgrade -y
-# RUN wget https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.3-34.1.25/forge-1.16.3-34.1.25-installer.jar
-# RUN apt-get install nano -y
+RUN apt-get update -y
+RUN apt-get install default-jre -y
+RUN apt-get install openjdk-11-jre-headless -y
+# RUN apt-get install openjdk-8-jre-headless -y
+
+COPY src/setup.py .
+COPY src/start.py .
+COPY src/utils.py .
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN python setup.py
 
 EXPOSE 25565
 
-# ENV PATH="${PATH}:/sinostec/server/app/node-v12.16.1-linux-x64/bin"
+ENTRYPOINT ["python", "start.py"]

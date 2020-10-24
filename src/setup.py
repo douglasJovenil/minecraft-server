@@ -7,6 +7,8 @@ from zipfile import ZipFile
 from time import sleep
 from signal import SIGINT
 
+from utils import getForgeApplicationFilename
+
 def main():
   urlInstaller = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.3-34.1.0/forge-1.16.3-34.1.0-installer.jar'
   urlMod = 'https://ijaminecraft.com/download/map/IJAMinecrafts-OneBlock-1-16-3.zip?v=VERSION'
@@ -72,18 +74,7 @@ def main():
     remove(forgeInstallerFilename)
     remove(f'{forgeInstallerFilename}.log')
     remove(modFilename)
-  
-  if (forgeApplicationFileAlreadyExists):
-    print('Inicializando servidor...')
-    system(f'java -jar {getForgeApplicationFilename()} nogui')
     
-def getForgeApplicationFilename():
-  filesAtDirectory = list(filter(lambda filename: 'forge-' in filename , listdir()))
-  filename = filesAtDirectory[0] if len(filesAtDirectory) > 0 else ''
-  return filename
 
 if __name__ == '__main__':
-  try:
-    main()
-  except KeyboardInterrupt:
-    print('Finalizando...')
+  main()

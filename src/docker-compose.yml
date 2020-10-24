@@ -1,8 +1,10 @@
+version: "3.3"
+
 services:
   minecraft:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: ./src/Dockerfile
     container_name: minecraft
     restart: always
     ports:

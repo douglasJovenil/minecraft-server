@@ -11,6 +11,12 @@ docker start minecraft
 docker exec -it minecraft /bin/bash
 ```
 
+## Running container
+```
+sudo docker-compose build
+sudo docker-compode up -d
+```
+
 ## Setup machine
 
 - Download the lastest version of Java from http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
