@@ -3,12 +3,12 @@
 ## Installing
 ```
 git clone https://github.com/douglasJovenil/minecraft-server-docker
+cd minecraft-server/src
+sudo docker-compose build
 ```
 
 ## Running container
 ```
-cd minecraft-server-docker/src
-sudo docker-compose build
 sudo docker-compode up -d
 ```
 
