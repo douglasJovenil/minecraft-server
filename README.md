@@ -1,6 +1,6 @@
 # Minecraft Server
 
-This application helps to create a Minecraft server using the [SkyBlock](https://www.minecraftmaps.com/survival-maps/skyblock) mod.
+This application helps to create a Minecraft server using the [SkyBlock](https://www.minecraftmaps.com/survival-maps/skyblock) map.
 
 ## 💻 Project
 
