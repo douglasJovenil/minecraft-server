@@ -10,12 +10,9 @@ from signal import SIGINT
 from utils import getForgeApplicationFilename
 
 def main():
-  urlInstaller = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.16.3-34.1.0/forge-1.16.3-34.1.0-installer.jar'
-  urlMod = 'https://ijaminecraft.com/download/map/IJAMinecrafts-OneBlock-1-16-3.zip?v=VERSION'
-
-  modFilename = 'skyblock.zip'
+  urlInstaller = 'https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.19.2-43.1.1/forge-1.19.2-43.1.1-installer.jar'
   
-  forgeInstallerFilename = 'forgeInstaller.jar'
+  forgeInstallerFilename = 'server.jar'
 
   forgeApplicationFilename = getForgeApplicationFilename()
   forgeApplicationFileAlreadyExists = isfile(forgeApplicationFilename)
@@ -59,22 +56,9 @@ def main():
     # Salva as configuracoes do servidor
     with open('server.properties', 'w') as f: f.write(content)
 
-    # Baixa os mods
-    print('Baixando mods...')
-    response = get(urlMod)
-    with open(modFilename, 'wb') as f: 
-      f.write(response.content)
-
-    rmtree('world')
-    mod = ZipFile(modFilename)
-    for file in mod.infolist():
-      file.filename = f'world/{"/".join(file.filename.split("/")[1:])}'
-      mod.extract(file)
-
     # Remove os arquivos de instalacao
     remove(forgeInstallerFilename)
     remove(f'{forgeInstallerFilename}.log')
-    remove(modFilename)
     
 
 if __name__ == '__main__':
