@@ -3,7 +3,7 @@ from os import system
 
 def main():
   print('Inicializando server')
-  system(f'java -Xmx15360M -Xms1024M -jar {getForgeApplicationFilename()} nogui')
+  system(f'./run.sh')
 
 if __name__ == '__main__':
   main()

@@ -36,7 +36,7 @@ def main():
     with open('eula.txt', 'w') as f: f.write('eula=true')
 
     print('Aguardando primeira inicialização do servidor...')
-    process = Popen(f'java -jar {getForgeApplicationFilename()} nogui', shell=True)
+    process = Popen(f'./run.sh', shell=True)
     # Aguarda alguns arquivos serem criados para depois finalizar o processo
     while (not(isdir('world/serverconfig'))): pass
     system('pkill java')
