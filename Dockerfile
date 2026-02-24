@@ -1,6 +1,6 @@
 FROM alpine:3.19
 
-ARG MINECRAFT_VERSION="1.21.1-52.0.24"
+ARG MINECRAFT_VERSION="1.21.11-61.1.1"
 ARG MINECRAFT_INSTALLER_URL="https://maven.minecraftforge.net/net/minecraftforge/forge/${MINECRAFT_VERSION}/forge-${MINECRAFT_VERSION}-installer.jar"
 ARG USER="minecraft"
 ARG WORKDIR="/server"
